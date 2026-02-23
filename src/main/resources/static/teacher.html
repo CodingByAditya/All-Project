@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Teacher - Attendance Session</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+
+<body class="center-page">
+  <div class="card">
+    <h1>🧑‍🏫 Teacher Attendance Session</h1>
+
+    <button class="btn-wide" onclick="startTeacherSession()">Start New Session (30s QR)</button>
+
+    <p id="sessionStatus" class="msg info">No session running</p>
+
+    <div id="qrBox" class="qr-box" style="display:none;">
+      <p class="qr-title">✅ Students scan QR within <b><span id="leftSec">30</span>s</b></p>
+
+      <img id="qrImg" class="qr-img" alt="QR Code"/>
+
+      <a id="studentLink" class="student-link" href="#" target="_blank">
+        Open Student Attendance Page
+      </a>
+
+      <button type="button" class="btn-wide" onclick="copyStudentLink()">📋 Copy Student Link</button>
+    </div>
+
+   
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

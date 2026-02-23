@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Smart Attendance - Student</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+
+<body class="center-page">
+  <div class="card">
+    <h1>🎓 Smart Attendance (Student)</h1>
+
+    <div class="form-grid">
+      <input type="text" id="studentName" placeholder="Student Name" autocomplete="off"/>
+      <input type="text" id="registrationNo" placeholder="Registration No" autocomplete="off"/>
+    </div>
+
+    <div class="datetime">
+      <strong>Date:</strong> <span id="date"></span> |
+      <strong>Time:</strong> <span id="time"></span>
+    </div>
+
+    <video id="video" autoplay playsinline></video>
+
+    <div class="btn-row">
+      <button type="button" onclick="startCamera()">Camera ON</button>
+      <button type="button" onclick="stopCamera()">Camera OFF</button>
+    </div>
+
+    <button type="button" class="btn-wide" onclick="markAttendance()">✅ Mark Attendance</button>
+
+    <p id="msg" class="msg info">Scan Teacher QR first.</p>
+
+    <canvas id="canvas" style="display:none;"></canvas>
+
+    <div id="photo-container" style="display:none; margin-top:12px;">
+      <img id="photo" alt="Captured Photo"
+           style="width:220px; max-width:100%; border-radius:14px; border:1px solid rgba(255,255,255,.5);"/>
+    </div>
+
+    <div class="footer-links">
+      <a href="teacher.html">🧑‍🏫 Teacher</a>
+      <a href="view.html">📋 Full List</a>
+      <a href="report.html">📊 Report</a>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

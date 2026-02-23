@@ -1,0 +1,345 @@
+* {
+	box-sizing: border-box;
+}
+
+:root {
+	--bg1: #0f2027;
+	--bg2: #203a43;
+	--bg3: #2c5364;
+	--border: rgba(255, 255, 255, 0.18);
+	--text: #fff;
+	--muted: rgba(255, 255, 255, 0.75);
+	--accent: #ffd369;
+	--accent2: #ffb703;
+	--shadow: 0 18px 50px rgba(0, 0, 0, 0.45);
+}
+
+body {
+	margin: 0;
+	font-family: "Segoe UI", Tahoma, sans-serif;
+	color: var(--text);
+	background: radial-gradient(circle at 20% 10%, rgba(0, 255, 255, 0.12),
+		transparent 35%),
+		radial-gradient(circle at 85% 15%, rgba(255, 160, 0, 0.10),
+		transparent 40%), linear-gradient(135deg, var(--bg1), var(--bg2),
+		var(--bg3));
+}
+
+.center-page {
+	min-height: 100vh;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 22px;
+}
+
+.card, .report-card {
+	width: 420px;
+	max-width: 92vw;
+	padding: 26px 24px;
+	text-align: center;
+	border-radius: 22px;
+	background: linear-gradient(180deg, rgba(255, 255, 255, 0.14),
+		rgba(255, 255, 255, 0.08));
+	border: 1px solid var(--border);
+	backdrop-filter: blur(14px);
+	box-shadow: var(--shadow);
+}
+
+h1 {
+	margin: 0 0 14px;
+	font-size: 20px;
+	font-weight: 900;
+}
+
+.form-grid {
+	display: grid;
+	gap: 10px;
+	margin-top: 12px;
+}
+
+input {
+	width: 100%;
+	padding: 12px;
+	border-radius: 12px;
+	border: 1px solid rgba(255, 255, 255, 0.45);
+	background: rgba(255, 255, 255, 0.92);
+	outline: none;
+	font-size: 14px;
+	color: #0b1d22;
+}
+
+.datetime {
+	margin-top: 10px;
+	font-size: 13px;
+	color: var(--muted);
+}
+
+video {
+	width: 100%;
+	height: 240px;
+	object-fit: cover;
+	border-radius: 14px;
+	margin-top: 12px;
+	border: 1px solid rgba(255, 255, 255, 0.50);
+	background: rgba(0, 0, 0, 0.28);
+}
+
+button {
+	padding: 12px;
+	border-radius: 14px;
+	border: 1px solid rgba(255, 255, 255, 0.22);
+	cursor: pointer;
+	font-weight: 900;
+	font-size: 14px;
+	color: #0b1d22;
+	background: linear-gradient(135deg, rgba(255, 211, 105, 0.95),
+		rgba(255, 183, 3, 0.90));
+	transition: transform .18s ease;
+}
+
+button:hover {
+	transform: translateY(-2px);
+}
+
+.btn-row {
+	display: flex;
+	gap: 10px;
+	margin-top: 12px;
+}
+
+.btn-row button {
+	flex: 1;
+}
+
+.btn-wide {
+	width: 100%;
+	margin-top: 12px;
+}
+
+.msg {
+	margin-top: 12px;
+	padding: 10px 12px;
+	border-radius: 12px;
+	font-weight: 800;
+	font-size: 14px;
+	background: rgba(0, 0, 0, 0.25);
+	border: 1px solid rgba(255, 255, 255, 0.12);
+	min-height: 18px;
+}
+
+.msg.info {
+	color: var(--accent);
+}
+
+.msg.success {
+	color: #4cd137;
+}
+
+.msg.warn {
+	color: #ffd369;
+}
+
+.msg.error {
+	color: #ff6b6b;
+}
+
+#photo {
+	width: 220px;
+	max-width: 100%;
+	border-radius: 14px;
+	border: 1px solid rgba(255, 255, 255, 0.60);
+}
+
+/* footer links */
+.footer-links {
+	margin-top: 18px;
+	display: flex;
+	justify-content: center;
+	gap: 16px;
+	flex-wrap: wrap;
+}
+
+.footer-links a {
+	color: var(--accent);
+	text-decoration: none;
+	font-weight: 900;
+	font-size: 13px;
+}
+
+.footer-links a:hover {
+	text-decoration: underline;
+}
+
+/* ✅ Teacher QR box */
+.qr-box {
+	margin-top: 14px;
+	padding: 14px;
+	border-radius: 16px;
+	border: 1px solid rgba(255, 255, 255, 0.14);
+	background: rgba(255, 255, 255, 0.06);
+}
+
+.qr-title {
+	margin: 0 0 12px;
+	color: #9cffb0;
+	font-weight: 900;
+}
+
+.qr-img {
+	width: 260px;
+	max-width: 100%;
+	border-radius: 12px;
+	background: #fff;
+	padding: 10px;
+	border: 1px solid rgba(255, 255, 255, 0.60);
+}
+
+.student-link {
+	display: block;
+	margin-top: 12px;
+	color: var(--accent);
+	font-weight: 900;
+	text-decoration: none;
+}
+
+.student-link:hover {
+	text-decoration: underline;
+}
+
+/* VIEW PAGE */
+.page-container {
+	width: min(1100px, 92vw);
+	margin: 30px auto;
+	color: #fff;
+}
+
+.header-card {
+	text-align: center;
+	margin-bottom: 18px;
+}
+
+.small-note {
+	opacity: 0.85;
+	font-size: 13px;
+}
+
+.table-wrapper {
+	overflow-x: auto;
+	border-radius: 16px;
+	border: 1px solid rgba(255, 255, 255, 0.14);
+	background: rgba(255, 255, 255, 0.06);
+}
+
+.attendance-table {
+	width: 100%;
+	border-collapse: collapse;
+}
+
+.attendance-table th, .attendance-table td {
+	padding: 12px;
+	text-align: center;
+	border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.attendance-table th {
+	background: rgba(0, 0, 0, 0.25);
+	font-size: 13px;
+	text-transform: uppercase;
+}
+
+.student-photo {
+	width: 70px;
+	height: 70px;
+	object-fit: cover;
+	border-radius: 12px;
+	border: 1px solid rgba(255, 255, 255, 0.60);
+}
+
+.no-data {
+	padding: 18px;
+	font-weight: 900;
+}
+
+.footer-action {
+	text-align: center;
+	margin-top: 18px;
+}
+
+.btn-back {
+	display: inline-block;
+	padding: 12px 22px;
+	border-radius: 14px;
+	font-weight: 900;
+	text-decoration: none;
+	color: #0b1d22;
+	background: linear-gradient(135deg, rgba(255, 211, 105, 0.95),
+		rgba(255, 183, 3, 0.90));
+}
+
+.title {
+	margin: 0;
+	color: var(--accent);
+	font-size: 24px;
+	font-weight: 900;
+}
+
+.subtitle {
+	margin: 10px 0 18px;
+	font-size: 13px;
+	color: var(--muted);
+}
+
+.search-box {
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+}
+
+.report-result {
+	display: none;
+	margin-top: 16px;
+	padding-top: 18px;
+	border-top: 1px solid rgba(255, 255, 255, 0.20);
+}
+
+.label {
+	font-size: 13px;
+	color: var(--accent);
+	letter-spacing: 1px;
+}
+
+.student-name {
+	font-size: 20px;
+	font-weight: 900;
+	margin-top: 8px;
+}
+
+.attendance-count {
+	font-size: 44px;
+	font-weight: 900;
+	color: #4cd137;
+	margin: 8px 0 6px;
+}
+
+.back-link {
+	display: inline-block;
+	margin-top: 18px;
+	color: rgba(255, 255, 255, 0.65);
+	text-decoration: none;
+	font-size: 12px;
+}
+
+.back-link:hover {
+	color: #fff;
+	text-decoration: underline;
+}
+
+@media ( max-width :480px) {
+	.card, .report-card {
+		padding: 22px 18px;
+	}
+	video {
+		height: 210px;
+	}
+}

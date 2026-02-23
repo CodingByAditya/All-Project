@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Attendance Report</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+
+<body class="center-page">
+  <div class="report-card">
+    <h1 class="title">📊 Attendance Report</h1>
+    <p class="subtitle">Enter Registration No to view attendance</p>
+
+    <div class="search-box">
+      <input id="regNoInput" type="text" placeholder="Registration No"/>
+      <button class="btn-wide" type="button" onclick="generateReport()">Generate Report</button>
+    </div>
+
+    <p id="msg" class="msg info">Ready</p>
+
+    <div id="reportResult" class="report-result">
+      <div class="label">Student</div>
+      <div id="displayName" class="student-name">—</div>
+
+      <div class="label" style="margin-top:14px;">Present Days</div>
+      <div id="displayCount" class="attendance-count">0 (0%)</div>
+
+      <div id="attendanceStatus" class="label" style="margin-top:10px;">STATUS: —</div>
+    </div>
+
+    <a href="index.html" class="back-link">← Back to Attendance</a>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
