@@ -3,8 +3,8 @@ const API_BASE = window.location.origin;
 
 let stream = null;
 let countdownTimer = null;
+let currentStudentUrl = ""; 
 
-// Helper to show status messages
 function showMsg(text, type = "info") {
     const msg = $("msg") || $("sessionStatus");
     if (!msg) return;
@@ -12,30 +12,22 @@ function showMsg(text, type = "info") {
     msg.innerText = text;
 }
 
-// ============================
-// 1. DATE & TIME (index.html)
-// ============================
+// 1. DATE & TIME (Fixed for Instant Display)
 function updateDateTime() {
-    const dateEl = $("date");
-    const timeEl = $("time");
-    if (!dateEl && !timeEl) return;
     const now = new Date();
-    if (dateEl) dateEl.innerText = now.toLocaleDateString("en-IN");
-    if (timeEl) timeEl.innerText = now.toLocaleTimeString("en-IN");
+    if ($("date")) $("date").innerText = now.toLocaleDateString("en-IN");
+    if ($("time")) $("time").innerText = now.toLocaleTimeString("en-IN");
 }
+updateDateTime(); // Call immediately
 setInterval(updateDateTime, 1000);
 
-// ============================
-// 2. CAMERA CONTROL (index.html)
-// ============================
+// 2. CAMERA CONTROL
 async function startCamera() {
     try {
         stream = await navigator.mediaDevices.getUserMedia({ video: true });
         $("video").srcObject = stream;
         showMsg("✅ Camera ON", "success");
-    } catch (e) {
-        showMsg("❌ Camera access denied", "error");
-    }
+    } catch (e) { showMsg("❌ Camera access denied", "error"); }
 }
 
 function stopCamera() {
@@ -44,58 +36,46 @@ function stopCamera() {
     showMsg("⚠️ Camera OFF", "warn");
 }
 
-// ============================
-// 3. MARK ATTENDANCE (index.html)
-// ============================
+// 3. MARK ATTENDANCE
 async function markAttendance() {
     const token = new URLSearchParams(window.location.search).get("token");
     const name = $("studentName")?.value.trim();
     const regNo = $("registrationNo")?.value.trim();
-    
     if (!token) return showMsg("❌ Scan Teacher QR first", "error");
-    if (!name || !regNo) return showMsg("❌ Missing Name or Reg No", "error");
-    if (!stream) return showMsg("❌ Start Camera first", "error");
-
-    const canvas = $("canvas");
+    
+    const canvas = document.createElement("canvas");
     canvas.width = $("video").videoWidth;
     canvas.height = $("video").videoHeight;
     canvas.getContext("2d").drawImage($("video"), 0, 0);
-    const imageData = canvas.toDataURL("image/png");
 
     try {
         showMsg("⏳ Saving...", "info");
         const res = await fetch(`${API_BASE}/student/add`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ name, registrationNo: regNo, image: imageData, token })
+            body: JSON.stringify({ name, registrationNo: regNo, image: canvas.toDataURL("image/png"), token })
         });
         if (res.ok) {
             showMsg("✅ Attendance Saved", "success");
             $("studentName").value = ""; $("registrationNo").value = "";
         } else {
-            showMsg("❌ Failed to save", "error");
+            const err = await res.text();
+            showMsg(`❌ ${err}`, "error");
         }
-    } catch (e) { showMsg("❌ Server unreachable", "error"); }
+    } catch (e) { showMsg("❌ Server Error", "error"); }
 }
 
-// ============================
-// 4. TEACHER SESSION (teacher.html)
-// ============================
+// 4. TEACHER SESSION
 async function startTeacherSession() {
     try {
         showMsg("⏳ Creating session...", "info");
         const res = await fetch(`${API_BASE}/session/start`);
-        if (!res.ok) throw new Error("Backend error");
-        
         const data = await res.json();
-        const studentUrl = `${window.location.origin}/index.html?token=${data.token}`;
-
-        $("qrImg").src = `https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=${encodeURIComponent(studentUrl)}`;
-        $("studentLink").href = studentUrl;
+        currentStudentUrl = `${window.location.origin}/index.html?token=${data.token}`;
+        $("qrImg").src = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(currentStudentUrl)}`;
         $("qrBox").style.display = "block";
-        
         startCountdown(data.expiresInSeconds || 30);
-    } catch (e) { showMsg("❌ Could not connect to Spring Boot", "error"); }
+    } catch (e) { showMsg("❌ Connection failed", "error"); }
 }
 
 function startCountdown(seconds) {
@@ -104,36 +84,27 @@ function startCountdown(seconds) {
     countdownTimer = setInterval(() => {
         left--;
         if ($("leftSec")) $("leftSec").innerText = left;
-        if (left <= 0) {
-            clearInterval(countdownTimer);
-            showMsg("⏳ Session Expired", "warn");
-            $("qrBox").style.display = "none";
+        if (left <= 0) { 
+            clearInterval(countdownTimer); 
+            $("qrBox").style.display = "none"; 
+            showMsg("⏳ Session Expired", "warn"); 
         }
     }, 1000);
 }
 
-// ============================
-// 5. REPORT GENERATION (report.html)
-// ============================
-async function generateReport() {
-    const regNo = $("regNoInput")?.value.trim();
-    if (!regNo) return showMsg("❌ Enter Reg No", "error");
-
-    try {
-        const res = await fetch(`${API_BASE}/student/report/${regNo}`);
-        const data = await res.json();
-        if (data && data.length > 0) {
-            $("displayName").innerText = data[0].name;
-            $("displayCount").innerText = `${data.length} (${((data.length/40)*100).toFixed(1)}%)`;
-            $("reportResult").style.display = "block";
-            showMsg("✅ Report loaded", "success");
-        } else { showMsg("❌ No records found", "warn"); }
-    } catch (e) { showMsg("❌ Server error", "error"); }
+function openStudentPage() {
+    if (currentStudentUrl) window.open(currentStudentUrl, '_blank');
+    else alert("Please start a session first!");
 }
 
-// ============================
-// 6. LOAD FULL LIST (view.html)
-// ============================
+function copyStudentLink() {
+    if (currentStudentUrl) {
+        navigator.clipboard.writeText(currentStudentUrl);
+        alert("📋 Link Copied!");
+    }
+}
+
+// 5. LIST & REPORTS
 if ($("data")) {
     (async function() {
         try {
@@ -141,13 +112,11 @@ if ($("data")) {
             const list = await res.json();
             $("data").innerHTML = list.map(s => `
                 <tr>
-                    <td><img src="${API_BASE}/photos/${s.photo}" class="student-photo"></td>
-                    <td>${s.name}</td>
-                    <td>${s.registrationNo}</td>
+                    <td><img src="${API_BASE}/photos/${s.photo}" class="student-photo" onerror="this.src='https://via.placeholder.com/50'"></td>
+                    <td><strong>${s.name}</strong><br><small>${s.registrationNo}</small></td>
                     <td>${s.attendanceDate}</td>
                     <td>${s.attendanceTime}</td>
                 </tr>`).join("");
-            showMsg("✅ Data updated", "success");
-        } catch (e) { showMsg("❌ Connection failed", "error"); }
+        } catch (e) { }
     })();
 }

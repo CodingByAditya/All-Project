@@ -1,34 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8"/><link rel="stylesheet" href="style.css"/>
   <title>Teacher Dashboard</title>
-  <link rel="stylesheet" href="style.css"/>
 </head>
 <body class="center-page">
   <div class="card">
     <h1>🧑‍🏫 Teacher Dashboard</h1>
-
-    <button class="btn-wide" onclick="startTeacherSession()">Start New Session (30s QR)</button>
+    <button onclick="startTeacherSession()" style="width:100%">Start New Session (30s QR)</button>
     <p id="sessionStatus" class="msg info">No session running</p>
-
-    <div id="qrBox" class="qr-box" style="display:none;">
-      <p class="qr-title">✅ Students scan QR within <b><span id="leftSec">30</span>s</b></p>
-      <img id="qrImg" class="qr-img" alt="QR Code"/>
-      <a id="studentLink" class="student-link" href="#" target="_blank">Open Student Page</a>
-      <button type="button" class="btn-wide" onclick="copyStudentLink()">📋 Copy Link</button>
+    
+    <div id="qrBox" style="display:none; margin-top:15px;">
+      <p>✅ Scan QR within <b><span id="leftSec">30</span>s</b></p>
+      <img id="qrImg" alt="QR Code" style="background:#fff; padding:10px; border-radius:10px; margin:10px auto; display:block;"/>
+      <button onclick="openStudentPage()" style="width:100%; margin-top:10px; background:rgba(255,255,255,0.1); color:#fff;">🔗 Open Student Page</button>
+      <button onclick="copyStudentLink()" style="width:100%; margin-top:10px;">📋 Copy Link</button>
     </div>
 
-    <div class="nav-section">
-        <p class="nav-label">ADMINISTRATION</p>
-        <div class="btn-row">
-            <button onclick="location.href='view.html'">📋 View List</button>
-            <button onclick="location.href='report.html'">📊 Reports</button>
+    <div style="margin-top:20px; border-top:1px solid rgba(255,255,255,0.1); padding-top:15px;">
+        <div style="display:flex; gap:10px;">
+            <button onclick="location.href='view.html'" style="flex:1">📋 View List</button>
+            <button onclick="location.href='report.html'" style="flex:1">📊 Reports</button>
         </div>
-        <div style="margin-top: 15px;">
-            <button class="btn-dashboard-link" onclick="location.href='index.html'">📷 Go to Camera Page</button>
-        </div>
+        <button class="btn-dashboard-link" onclick="location.href='index.html'">📷 Go to Camera Page</button>
     </div>
   </div>
   <script src="script.js"></script>

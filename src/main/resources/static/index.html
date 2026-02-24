@@ -1,45 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Smart Attendance - Student</title>
-  <link rel="stylesheet" href="style.css"/>
+  <meta charset="UTF-8"/><link rel="stylesheet" href="style.css"/>
+  <title>Student Attendance</title>
 </head>
 <body class="center-page">
   <div class="card">
     <h1>🎓 Student Attendance</h1>
-
-    <div class="form-grid">
-      <input type="text" id="studentName" placeholder="Student Name" autocomplete="off"/>
-      <input type="text" id="registrationNo" placeholder="Registration No" autocomplete="off"/>
-    </div>
-
-    <div class="datetime">
-      <span id="date"></span> | <span id="time"></span>
-    </div>
-
+    <input type="text" id="studentName" placeholder="Student Name"/>
+    <input type="text" id="registrationNo" placeholder="Registration No"/>
+    <div class="datetime"><span id="date">--/--/----</span> | <span id="time">--:--:-- --</span></div>
     <video id="video" autoplay playsinline></video>
-
-    <div class="btn-row">
-      <button onclick="startCamera()">Camera ON</button>
-      <button onclick="stopCamera()">Camera OFF</button>
+    <div style="display:flex; gap:10px; margin-top:10px;">
+      <button onclick="startCamera()" style="flex:1">Camera ON</button>
+      <button onclick="stopCamera()" style="flex:1">Camera OFF</button>
     </div>
-
-    <button class="btn-wide" onclick="markAttendance()">✅ Mark Attendance</button>
-    
+    <button onclick="markAttendance()" style="width:100%; margin-top:10px;">✅ Mark Attendance</button>
     <p id="msg" class="msg info">Scan Teacher QR first.</p>
-    
-    <canvas id="canvas" style="display:none;"></canvas>
-    <div id="photo-container" style="display:none; margin-top:12px;">
-      <img id="photo" alt="Captured Photo"/>
-    </div>
-
-    <div class="nav-section">
-      <button class="btn-dashboard-link" type="button" onclick="location.href='teacher.html'">
-        ← Back to Teacher Dashboard
-      </button>
-    </div>
+    <button class="btn-dashboard-link" onclick="location.href='teacher.html'">← Back to Teacher Dashboard</button>
   </div>
   <script src="script.js"></script>
 </body>

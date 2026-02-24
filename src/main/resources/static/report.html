@@ -1,34 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8"/><link rel="stylesheet" href="style.css"/>
   <title>Attendance Report</title>
-  <link rel="stylesheet" href="style.css"/>
 </head>
 <body class="center-page">
   <div class="report-card">
-    <h1 class="title">📊 Attendance Report</h1>
-    
-    <div class="search-box">
-      <input id="regNoInput" type="text" placeholder="Registration No"/>
-      <button class="btn-wide" onclick="generateReport()">Generate Report</button>
-    </div>
-
+    <h1>📊 Attendance Report</h1>
+    <input id="regNoInput" type="text" placeholder="Registration No"/>
+    <button onclick="generateReport()" style="width:100%">Generate Report</button>
     <p id="msg" class="msg info">Ready</p>
-
-    <div class="nav-section">
-      <button class="btn-dashboard-link" onclick="location.href='teacher.html'">
-        ← Back to Teacher Dashboard
-      </button>
-    </div>
-
-    <div id="reportResult" class="report-result" style="display:none;">
-      <div class="label">Student</div>
-      <div id="displayName" class="student-name">—</div>
-      <div class="label" style="margin-top:14px;">Present Days</div>
-      <div id="displayCount" class="attendance-count">0 (0%)</div>
-      <div id="attendanceStatus" class="label">STATUS: —</div>
+    <button class="btn-dashboard-link" onclick="location.href='teacher.html'">← Back to Teacher Dashboard</button>
+    <div id="reportResult" style="display:none; margin-top:15px; border-top:1px solid rgba(255,255,255,0.1); padding-top:15px;">
+      <div id="displayName" style="font-size:20px; font-weight:bold;">—</div>
+      <div id="displayCount" style="font-size:44px; color:#4cd137; font-weight:900;">0</div>
     </div>
   </div>
   <script src="script.js"></script>

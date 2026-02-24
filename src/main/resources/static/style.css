@@ -4,11 +4,12 @@
 	--accent: #f9c941;
 	--accent-dark: #f1a817;
 	--text-muted: rgba(255, 255, 255, 0.6);
+	--border: rgba(255, 255, 255, 0.1);
 }
 
 body {
 	margin: 0;
-	font-family: 'Segoe UI', sans-serif;
+	font-family: 'Segoe UI', Tahoma, sans-serif;
 	color: #fff;
 	background-color: var(--bg-main);
 	display: flex;
@@ -17,49 +18,35 @@ body {
 	min-height: 100vh;
 }
 
-.card, .report-card {
+.card, .report-card, .list-container {
 	width: 420px;
 	max-width: 95vw;
 	padding: 25px;
 	border-radius: 25px;
 	background-color: var(--bg-card);
-	border: 1px solid rgba(255, 255, 255, 0.1);
+	border: 1px solid var(--border);
 	text-align: center;
 	box-shadow: 0 20px 45px rgba(0, 0, 0, 0.3);
 }
 
-/* Minimalist Link Style Button */
-.btn-dashboard-link {
-	background: transparent !important;
-	border: none !important;
-	color: var(--text-muted) !important;
-	font-size: 14px;
-	font-weight: 500;
-	cursor: pointer;
-	width: 100%;
-	transition: color 0.2s;
-	outline: none;
+/* Wide container for view.html */
+.list-container {
+	width: 900px;
 }
 
-.btn-dashboard-link:hover {
-	color: #fff !important;
-	text-decoration: underline;
-}
-
-h1, .title {
-	font-size: 24px;
-	font-weight: 900;
-	margin: 10px 0;
-}
-
+/* Resized inputs to match button height */
 input {
 	width: 100%;
 	padding: 14px;
-	border-radius: 12px;
+	border-radius: 14px;
 	border: none;
 	background: #f1f1f1;
 	color: #333;
 	margin-bottom: 12px;
+	outline: none;
+	font-size: 16px;
+	font-weight: 600;
+	box-sizing: border-box;
 }
 
 button {
@@ -70,20 +57,25 @@ button {
 	cursor: pointer;
 	background: linear-gradient(180deg, var(--accent), var(--accent-dark));
 	color: #1a1a1a;
+	transition: transform 0.1s;
 }
 
-.btn-wide {
+button:active {
+	transform: scale(0.98);
+}
+
+.btn-dashboard-link {
+	background: transparent !important;
+	border: none !important;
+	color: var(--text-muted) !important;
+	font-size: 14px;
+	font-weight: 500;
+	cursor: pointer;
 	width: 100%;
-}
-
-.btn-row {
-	display: flex;
-	gap: 10px;
-	margin: 10px 0;
-}
-
-.btn-row button {
-	flex: 1;
+	margin-top: 10px;
+	transition: color 0.2s;
+	outline: none;
+	display: block;
 }
 
 .msg {
@@ -95,16 +87,39 @@ button {
 	font-weight: 700;
 }
 
+/* Standardized Camera Size */
 video {
-	width: 100%;
+	width: 320px;
+	height: auto;
 	border-radius: 15px;
-	margin: 15px 0;
+	margin: 15px auto;
+	display: block;
 	background: #000;
+	border: 1px solid var(--border);
+}
+
+.styled-table {
+	width: 100%;
+	border-collapse: collapse;
+	margin-top: 20px;
+}
+
+.styled-table th {
+	background: #2b3a3c;
+	color: var(--accent);
+	padding: 12px;
+	text-align: left;
+}
+
+.styled-table td {
+	padding: 12px;
+	border-bottom: 1px solid var(--border);
 }
 
 .student-photo {
-	width: 50px;
-	height: 50px;
+	width: 48px;
+	height: 48px;
 	border-radius: 50%;
 	object-fit: cover;
+	border: 2px solid var(--accent);
 }
